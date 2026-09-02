@@ -1,0 +1,12 @@
+{% import 'include/macros.twig' as macros %}
+{% set constants = constants(node) %}
+{% if constants is not empty %}
+## Constants
+
+| Constant | Visibility | Type | Value |
+|:---------|:-----------|:-----|:------|
+{% for constant in constants %}
+| `{{ constant.name }}` | {{ constant.visibility | default('*default*') }} | {% if constant.type %}`{{ macros.mdEsc(constant.type) }}`{% endif %} | {{ macros.mdCell(constant.value) }} |
+{% endfor %}
+
+{% endif %}

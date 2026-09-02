@@ -1,5 +1,3 @@
-***
-
 # JustTime
 
 Class JustTime
@@ -7,13 +5,9 @@ Class JustTime
 Class representing a time of day, with no date or timezone information
 
 * Full name: `\MadisonSolutions\JustDate\JustTime`
-* This class implements:
-[`\JsonSerializable`](../../JsonSerializable.md)
-
-
+* Implements: `\JsonSerializable`
 
 ## Properties
-
 
 ### since_midnight
 
@@ -22,11 +16,6 @@ The number of seconds from midnight to this time
 ```php
 public int $since_midnight
 ```
-
-
-
-
-
 
 ***
 
@@ -38,11 +27,6 @@ Hours, from 0 to 23, as an integer
 public int $hours
 ```
 
-
-
-
-
-
 ***
 
 ### minutes
@@ -52,11 +36,6 @@ Minutes from 0 to 59, as an integer
 ```php
 public int $minutes
 ```
-
-
-
-
-
 
 ***
 
@@ -68,15 +47,9 @@ Seconds, from 0 to 59, as an integer
 public int $seconds
 ```
 
-
-
-
-
-
 ***
 
 ## Methods
-
 
 ### make
 
@@ -94,19 +67,13 @@ eg supplying 26:-10:00 will result in 01:50:00
 
 * This method is **static**.
 
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$hours` | **int** | The hours (0 - 23) |
-| `$minutes` | **int** | The minutes (0 - 59) |
-| `$seconds` | **int** | The seconds (0 - 59) |
-
-
-
+| `$hours` | `int` | The hours (0 - 23) |
+| `$minutes` | `int` | The minutes (0 - 59) |
+| `$seconds` | `int` | The seconds (0 - 59) |
 
 ***
 
@@ -122,21 +89,15 @@ Note the hours will wrap around midnight if the total number of seconds is more 
 
 * This method is **static**.
 
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$seconds_since_midnight` | **int** | The total number of seconds since midnight |
-
+| `$seconds_since_midnight` | `int` | The total number of seconds since midnight |
 
 **Return Value:**
 
 The new JustTime instance
-
-
 
 ***
 
@@ -148,25 +109,17 @@ Create a new JustTime object from a DateTime object
 public static fromDateTime(\DateTime $date): \MadisonSolutions\JustDate\JustTime
 ```
 
-
-
 * This method is **static**.
-
-
-
 
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$date` | **\DateTime** | The DateTime object (remains unchanged) |
-
+| `$date` | `\DateTime` | The DateTime object (remains unchanged) |
 
 **Return Value:**
 
 The new JustTime instance
-
-
 
 ***
 
@@ -178,25 +131,17 @@ Get the current time
 public static now(?\DateTimeZone $timezone = null): \MadisonSolutions\JustDate\JustTime
 ```
 
-
-
 * This method is **static**.
-
-
-
 
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$timezone` | **?\DateTimeZone** | Optional timezone - if specified the time will be whatever the time is right now in the specified timezone |
-
+| `$timezone` | `?\DateTimeZone` | Optional timezone - if specified the time will be whatever the time is right now in the specified timezone |
 
 **Return Value:**
 
 The new JustTime instance
-
-
 
 ***
 
@@ -208,26 +153,18 @@ Get the time at the specified timestamp
 public static fromTimestamp(int $timestamp, ?\DateTimeZone $timezone = null): \MadisonSolutions\JustDate\JustTime
 ```
 
-
-
 * This method is **static**.
-
-
-
 
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$timestamp` | **int** |  |
-| `$timezone` | **?\DateTimeZone** | Optional timezone - if specified the time will be whatever the time is in the specified timezone at the specified timestamp |
-
+| `$timestamp` | `int` |  |
+| `$timezone` | `?\DateTimeZone` | Optional timezone - if specified the time will be whatever the time is in the specified timezone at the specified timestamp |
 
 **Return Value:**
 
 The new JustTime instance
-
-
 
 ***
 
@@ -239,25 +176,17 @@ Create a new JustTime object from a string in H:i:s format
 public static fromHis(string $his): \MadisonSolutions\JustDate\JustTime
 ```
 
-
-
 * This method is **static**.
-
-
-
 
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$his` | **string** | The date in H:i:s format, eg &#039;14:35:02&#039; (note seconds can be omitted eg &#039;14:35&#039;) |
-
+| `$his` | `string` | The date in H:i:s format, eg '14:35:02' (note seconds can be omitted eg '14:35') |
 
 **Return Value:**
 
 The new JustTime instance
-
-
 
 ***
 
@@ -269,25 +198,17 @@ Get hours minutes and seconds integers from a string in H:i:s format, if valid
 public static parseHis(string $his): array{0: int, 1: int, 2: int}
 ```
 
-
-
 * This method is **static**.
-
-
-
 
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$his` | **string** | The date in H:i:s format, eg &#039;14:35&#039; (note seconds can be omitted eg &#039;14:35&#039;) |
-
+| `$his` | `string` | The date in H:i:s format, eg '14:35' (note seconds can be omitted eg '14:35') |
 
 **Return Value:**
 
 Array containing integers [year, month, day]
-
-
 
 ***
 
@@ -299,26 +220,18 @@ Return the earliest of a set of times
 public static earliest(\MadisonSolutions\JustDate\JustTime $first, \MadisonSolutions\JustDate\JustTime $others): \MadisonSolutions\JustDate\JustTime
 ```
 
-
-
 * This method is **static**.
-
-
-
 
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$first` | **\MadisonSolutions\JustDate\JustTime** |  |
-| `$others` | **\MadisonSolutions\JustDate\JustTime** |  |
-
+| `$first` | `\MadisonSolutions\JustDate\JustTime` |  |
+| `$others` | `\MadisonSolutions\JustDate\JustTime` |  |
 
 **Return Value:**
 
 The earliest time from $first and $others
-
-
 
 ***
 
@@ -330,26 +243,18 @@ Return the latest of a set of times
 public static latest(\MadisonSolutions\JustDate\JustTime $first, \MadisonSolutions\JustDate\JustTime $others): \MadisonSolutions\JustDate\JustTime
 ```
 
-
-
 * This method is **static**.
-
-
-
 
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$first` | **\MadisonSolutions\JustDate\JustTime** |  |
-| `$others` | **\MadisonSolutions\JustDate\JustTime** |  |
-
+| `$first` | `\MadisonSolutions\JustDate\JustTime` |  |
+| `$others` | `\MadisonSolutions\JustDate\JustTime` |  |
 
 **Return Value:**
 
 The latest time from $first and $others
-
-
 
 ***
 
@@ -367,21 +272,15 @@ The return value will be an array of integers [0 => hours, 1 => minutes, 2 => se
 
 * This method is **static**.
 
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$seconds_since_midnight` | **int** | The total number of seconds since midnight |
-
+| `$seconds_since_midnight` | `int` | The total number of seconds since midnight |
 
 **Return Value:**
 
 The number of hours, minutes and seconds
-
-
 
 ***
 
@@ -393,16 +292,6 @@ Standard string representation is H:i:s format
 public __toString(): string
 ```
 
-
-
-
-
-
-
-
-
-
-
 ***
 
 ### format
@@ -410,28 +299,20 @@ public __toString(): string
 Create a string representation of the time, with the given format
 
 ```php
-public format(string $format = &#039;H:i:s&#039;): string
+public format(string $format = 'H:i:s'): string
 ```
 
 Note that any date values which are requested in the format will have values from the Unix epoch - Jan 1st 1970
-
-
-
-
-
 
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$format` | **string** | The format, as per PHP&#039;s date() function |
-
+| `$format` | `string` | The format, as per PHP's date() function |
 
 **Return Value:**
 
 The formatted string
-
-
 
 ***
 
@@ -447,25 +328,17 @@ Note values will wrap around midnight. Eg if you add 2 hours to 23:30:00 you'll 
 (This implies that sometimes adding positive values can lead to a time which is considered 'before' the original)
 Note any of the values can be negative to subtract that amount of time instead of adding
 
-
-
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$hours` | **int** | The number of hours to add |
-| `$minutes` | **int** | The number of minutes to add |
-| `$seconds` | **int** | The number of seconds to add |
-
+| `$hours` | `int` | The number of hours to add |
+| `$minutes` | `int` | The number of minutes to add |
+| `$seconds` | `int` | The number of seconds to add |
 
 **Return Value:**
 
 The new JustTime object
-
-
 
 ***
 
@@ -477,25 +350,15 @@ Test whether a JustTime object refers to the same time as this one
 public isSameAs(\MadisonSolutions\JustDate\JustTime $other): bool
 ```
 
-
-
-
-
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$other` | **\MadisonSolutions\JustDate\JustTime** |  |
-
+| `$other` | `\MadisonSolutions\JustDate\JustTime` |  |
 
 **Return Value:**
 
 True if $other is the same time
-
-
 
 ***
 
@@ -507,25 +370,15 @@ Test whether a JustTime object refers to a time before this one
 public isBefore(\MadisonSolutions\JustDate\JustTime $other): bool
 ```
 
-
-
-
-
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$other` | **\MadisonSolutions\JustDate\JustTime** |  |
-
+| `$other` | `\MadisonSolutions\JustDate\JustTime` |  |
 
 **Return Value:**
 
 True if $other is before this time
-
-
 
 ***
 
@@ -537,25 +390,15 @@ Test whether a JustTime object refers to a time before or equal to this one
 public isBeforeOrSameAs(\MadisonSolutions\JustDate\JustTime $other): bool
 ```
 
-
-
-
-
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$other` | **\MadisonSolutions\JustDate\JustTime** |  |
-
+| `$other` | `\MadisonSolutions\JustDate\JustTime` |  |
 
 **Return Value:**
 
 True if $other is before or the same as this date
-
-
 
 ***
 
@@ -567,25 +410,15 @@ Test whether a JustTime object refers to a time after this one
 public isAfter(\MadisonSolutions\JustDate\JustTime $other): bool
 ```
 
-
-
-
-
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$other` | **\MadisonSolutions\JustDate\JustTime** |  |
-
+| `$other` | `\MadisonSolutions\JustDate\JustTime` |  |
 
 **Return Value:**
 
 True if $other is after this date
-
-
 
 ***
 
@@ -597,25 +430,15 @@ Test whether a JustTime object refers to a time after or equal to this one
 public isAfterOrSameAs(\MadisonSolutions\JustDate\JustTime $other): bool
 ```
 
-
-
-
-
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$other` | **\MadisonSolutions\JustDate\JustTime** |  |
-
+| `$other` | `\MadisonSolutions\JustDate\JustTime` |  |
 
 **Return Value:**
 
 True if $other is after or the same as this time
-
-
 
 ***
 
@@ -630,23 +453,15 @@ public round(int $interval_seconds): \MadisonSolutions\JustDate\JustTime
 For example to round 09:47 to the nearest 15 minutes:
 $time = (JustTime::make(9, 47))->round(15 * 60); // 09:45
 
-
-
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$interval_seconds` | **int** | The length of the interval to round to, in seconds |
-
+| `$interval_seconds` | `int` | The length of the interval to round to, in seconds |
 
 **Return Value:**
 
 A new JustTime instance with the rounded time
-
-
 
 ***
 
@@ -658,17 +473,6 @@ Json serialize to the H:i:s string
 public jsonSerialize(): string
 ```
 
-
-
-
-
-
-
-
-
-
-
 ***
 
-***
-> Automatically generated from source code comments using [phpDocumentor](http://www.phpdoc.org/)
+> Automatically generated from source code comments using [phpDocumentor](https://www.phpdoc.org/)

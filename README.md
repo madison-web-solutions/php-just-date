@@ -421,7 +421,8 @@ make build      # build the Docker images (first time only)
 make install    # composer install
 make test       # run the tests under one PHP version (make test PHP=8.1 to choose)
 make test-all   # run the tests under every supported PHP version
-make check      # tests and PHPStan under every version, plus a Pint style check
+make docs       # regenerate the API reference in docs/ from the docblocks
+make check      # tests and PHPStan under every version, Pint style check, and docs up-to-date check
 ```
 
 Run `make help` to see all available targets.

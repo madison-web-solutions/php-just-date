@@ -1,68 +1,23 @@
-***
-
 # DayOfWeek
 
 Enum DayOfWeek
 
-
-
 * Full name: `\MadisonSolutions\JustDate\DayOfWeek`
+* Backed by: `int`
 
 ## Cases
 
-
-### Sunday ( = 0)
-
-
-
-
-***
-
-### Monday ( = 1)
-
-
-
-
-***
-
-### Tuesday ( = 2)
-
-
-
-
-***
-
-### Wednesday ( = 3)
-
-
-
-
-***
-
-### Thursday ( = 4)
-
-
-
-
-***
-
-### Friday ( = 5)
-
-
-
-
-***
-
-### Saturday ( = 6)
-
-
-
-
-***
-
+| Case | Value | Description |
+|------|-------|-------------|
+| `Sunday` | `0` |  |
+| `Monday` | `1` |  |
+| `Tuesday` | `2` |  |
+| `Wednesday` | `3` |  |
+| `Thursday` | `4` |  |
+| `Friday` | `5` |  |
+| `Saturday` | `6` |  |
 
 ## Methods
-
 
 ### isWeekday
 
@@ -71,16 +26,6 @@ Is this a weekday (mon - fri)?
 ```php
 public isWeekday(): bool
 ```
-
-
-
-
-
-
-
-
-
-
 
 ***
 
@@ -92,16 +37,6 @@ Is this a weekend day (sat or sun)?
 public isWeekend(): bool
 ```
 
-
-
-
-
-
-
-
-
-
-
 ***
 
 ### addDays
@@ -112,21 +47,11 @@ Return the new DayOfWeek after adding $num days
 public addDays(int $num): \MadisonSolutions\JustDate\DayOfWeek
 ```
 
-
-
-
-
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$num` | **int** |  |
-
-
-
+| `$num` | `int` |  |
 
 ***
 
@@ -138,21 +63,11 @@ Return the new DayOfWeek after subtracting $num days
 public subDays(int $num): \MadisonSolutions\JustDate\DayOfWeek
 ```
 
-
-
-
-
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$num` | **int** |  |
-
-
-
+| `$num` | `int` |  |
 
 ***
 
@@ -169,23 +84,15 @@ Returns zero if the specified DayOfWeek is the same as this one
 For example DayOfWeek::Sunday->numDaysUntil(DayOfWeek::Monday) is 1
 DayOfWeek::Monday->numDaysUntil(DayOfWeek::Sunday) is 6
 
-
-
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$to` | **\MadisonSolutions\JustDate\DayOfWeek** | The target DayOfWeek |
-
+| `$to` | `\MadisonSolutions\JustDate\DayOfWeek` | The target DayOfWeek |
 
 **Return Value:**
 
 The number of days until the target DayOfWeek
-
-
 
 ***
 
@@ -202,25 +109,16 @@ Returns zero if the specified DayOfWeek is the same as this one
 For example DayOfWeek::Sunday->numDaysSince(DayOfWeek::Monday) is 6
 DayOfWeek::Monday->numDaysUntil(DayOfWeek::Sunday) is 1
 
-
-
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$from` | **\MadisonSolutions\JustDate\DayOfWeek** | The target DayOfWeek |
-
+| `$from` | `\MadisonSolutions\JustDate\DayOfWeek` | The target DayOfWeek |
 
 **Return Value:**
 
 The number of days until the target DayOfWeek
 
-
-
 ***
 
-***
-> Automatically generated from source code comments using [phpDocumentor](http://www.phpdoc.org/)
+> Automatically generated from source code comments using [phpDocumentor](https://www.phpdoc.org/)

@@ -1,47 +1,31 @@
 {% import 'include/macros.twig' as macros %}
 {% block content %}
-***
 {% include 'config/header.md.twig' %}
-
-# {{ node.name }}
-
-{{ node.summary|raw }}
-
-{{ node.description|raw }}
-
+{{ macros.mdElementHeader(node) -}}
 * Full name: `{{ node.FullyQualifiedStructuralElementName }}`
-{% if node.parent and node.parent is not empty %}* Parent enum: {{ macros.mdClassLink(node.parent, macros.mdClassPath(node), node.parent.FullyQualifiedStructuralElementName) }}
-{% endif %}
-{% if node.final %}* This enum is marked as **final** and can't be subclassed
-{% endif %}
-{% if node.deprecated %}* **Warning:** this enum is **deprecated**. This means that this enum will likely be removed in a future version.
+{% if node.backedType %}
+* Backed by: `{{ node.backedType | raw }}`
 {% endif %}
 {% if node.interfaces is not empty %}
-* This enum implements:
-{% for interface in node.interfaces %}
-{% if loop.index0 > 0 %}{{ ', ' }}{% endif %}{{ macros.mdClassLink(interface, macros.mdClassPath(node), interface) }}{% endfor %}
+* Implements: {% for interface in node.interfaces %}{% if not loop.first %}, {% endif %}{{ macros.mdElementRef(interface, macros.mdClassPath(node)) }}{% endfor %}
+
+{% endif %}
+{% if node.deprecated %}
+* **Warning:** this enum is **deprecated**. This means that this enum will likely be removed in a future version.
 {% endif %}
 
-{# Check cases #}
+{{ macros.mdSeeAlso(node) -}}
 {% set cases = cases(node) %}
 {% if cases is not empty %}
 ## Cases
 
+| Case | Value | Description |
+|------|-------|-------------|
 {% for case in cases %}
-{% include 'enum-case.md.twig' %}
+| `{{ case.name }}` | {% if case.value is defined %}`{{ case.value }}`{% endif %} | {{ macros.mdCell(case.summary) }}{% if case.description is not empty %} {{ macros.mdCell(case.description) }}{% endif %} |
 {% endfor %}
+
 {% endif %}
-
-
-{# Check methods #}
-{% set methods = methods(node) %}
-{% if methods is not empty %}
-## Methods
-
-{% for method in methods %}
-{% include 'method.md.twig' %}
-{% endfor %}
-{% endif %}{# if methods #}
-
+{% include 'include/members.twig' %}
 {% include 'config/footer.md.twig' %}
 {% endblock %}

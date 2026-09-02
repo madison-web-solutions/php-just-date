@@ -34,8 +34,9 @@ make check                      # test-all + phpstan-all + pint --test
 make php ARGS="-r 'echo PHP_VERSION;'"   # one-off php command
 make shell PHP=8.5              # bash inside a container
 
-# API docs (phpDocumentor, not a composer dep and not in the Docker image; uses the custom Markdown theme in phpdoc-theme/)
-phpdoc                          # regenerates docs/ from phpdoc.dist.xml
+# API docs (phpDocumentor, run from its own image, output to docs/ via phpdoc.dist.xml + the custom Markdown theme in phpdoc-theme/)
+make docs                       # regenerate docs/
+make docs-check                 # regenerate and fail if docs/ differs from what is committed (part of make check)
 ```
 
 Every target defaults to the oldest supported version, so code or packages that work there are the most likely to work everywhere. Independently, `composer.json` sets `config.platform.php` to `8.1.0`, so Composer resolves an 8.1-compatible `vendor/` whichever container it runs in. When dropping support for a PHP version, bump `require.php`, `config.platform.php`, `VERSIONS` in the Makefile and the service list in `compose.yaml` together.
@@ -62,6 +63,6 @@ Test classes live in `test/` with no namespace and no bootstrap beyond Composer'
 
 ## Conventions
 
-- Public API changes need a matching entry in `CHANGELOG.md`, updated examples in `README.md` where relevant, and regenerated `docs/`.
+- Public API changes need a matching entry in `CHANGELOG.md`, updated examples in `README.md` where relevant, and a `make docs` run with the regenerated `docs/` committed. `make check` fails if `docs/` is stale.
 - `JustDate` "magic" properties (`year`, `month`, `day`, `day_of_week`, `timestamp`) are declared with `@property-read` on the class docblock and resolved in `__get`/`__isset`; add new ones in all three places so PHPStan level 9 stays green.
 - PHPStan only analyses `src/`; tests are type-annotated for PHPStan anyway (e.g. `@param class-string<object>`).

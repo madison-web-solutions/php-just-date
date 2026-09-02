@@ -1,5 +1,3 @@
-***
-
 # DateRangeList
 
 Interface DateRangeList
@@ -13,10 +11,7 @@ MutableDateSet objects (the list of included ranges)
 
 * Full name: `\MadisonSolutions\JustDate\DateRangeList`
 
-
-
 ## Methods
-
 
 ### getRanges
 
@@ -26,21 +21,10 @@ Get the DateRange objects associated with this DateRangeList
 public getRanges(): \MadisonSolutions\JustDate\DateRange[]
 ```
 
-
-
-
-
-
-
-
-
 **Return Value:**
 
 An array of DateRange objects
 
-
-
 ***
 
-***
-> Automatically generated from source code comments using [phpDocumentor](http://www.phpdoc.org/)
+> Automatically generated from source code comments using [phpDocumentor](https://www.phpdoc.org/)

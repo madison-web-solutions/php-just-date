@@ -1,59 +1,21 @@
 {% import "include/macros.twig" as macros %}
 {% block content %}
-***
 {% include 'config/header.md.twig' %}
-
-# {{ node.name }}
-
-{{ node.summary|raw }}
-
-{{ node.description|raw }}
-
+{{ macros.mdElementHeader(node) -}}
 * Full name: `{{ node.FullyQualifiedStructuralElementName }}`
-{% if node.parent and node.parent is not empty %}* Parent interface: {{ macros.mdClassLink(node.parent, macros.mdClassPath(node), node.parent.FullyQualifiedStructuralElementName) }}
+{% if node.parent is not empty %}
+* Parent interface: {{ macros.mdClassLink(node.parent, macros.mdClassPath(node), node.parent.FullyQualifiedStructuralElementName) }}
 {% endif %}
-{% if node.final %}* This interface is marked as **final** and can't be subclassed
+{% if node.interfaces is not empty %}
+* Extends: {% for interface in node.interfaces %}{% if not loop.first %}, {% endif %}{{ macros.mdElementRef(interface, macros.mdClassPath(node)) }}{% endfor %}
+
 {% endif %}
-{% if node.deprecated %}* **Warning:** this interface is **deprecated**. This means that this interface will likely be removed in a future version.
-{% endif %}
-{% if node.interfaces is not empty %}* This interface implements: {{ node.interfaces|join(', ')|raw }}
-{% endif %}
-
-{% if node.tags.see is not empty or node.tags.link is not empty %}
-**See Also:**
-
-{% for see in node.tags.see %}
-* {{ see.reference }} {% if see.description %}- {{ see.description|raw }}{% endif %}
-
-{% endfor %}
-{% for link in node.tags.link %}
-* {{ link.link }} {% if link.description and link.description != link.link %}- {{ link.description|raw }}{% endif %}
-
-{% endfor %}
-
-{% endif %}{# node.tags.see || node.tags.link #}
-
-{# Check constants #}
-{% set constants = constants(node) %}
-{% if constants is not empty %}
-## Constants
-
-| Constant | Visibility | Type | Value |
-|:---------|:-----------|:-----|:------|
-{% for constant in constants %}
-|`{{constant.name}}`|{{ constant.visibility | default('*default*') }}|{{macros.mdEsc(constant.type) | default(' ')}}|{{constant.value}}|
-{% endfor %}
+{% if node.deprecated %}
+* **Warning:** this interface is **deprecated**. This means that this interface will likely be removed in a future version.
 {% endif %}
 
-{# Check methods #}
-{% set methods = methods(node) %}
-{% if methods is not empty %}
-## Methods
-
-{% for method in node.methods %}
-{% include 'method.md.twig' %}
-{% endfor %}
-{% endif %}{# if methods #}
-
+{{ macros.mdSeeAlso(node) -}}
+{% include 'include/constants.twig' %}
+{% include 'include/members.twig' %}
 {% include 'config/footer.md.twig' %}
 {% endblock %}

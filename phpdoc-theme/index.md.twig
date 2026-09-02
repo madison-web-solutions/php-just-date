@@ -1,62 +1,53 @@
 {% import "include/macros.twig" as macros %}
-{# Assign global vars here #}
-
 {% block content %}
-***
 {% include 'config/header.md.twig' %}
-
 # API Reference
 
-## Namespaces
-
 {% for namespace in project.indexes.namespaces|sort((a,b) => a.FullyQualifiedStructuralElementName <=> b.FullyQualifiedStructuralElementName) %}
-
-### {{ namespace.FullyQualifiedStructuralElementName }}
+{% if (namespace.classes|length + namespace.traits|length + namespace.interfaces|length + namespace.enums|length) > 0 %}
+## {{ namespace.FullyQualifiedStructuralElementName }}
 
 {% if namespace.classes|length > 0 %}
-#### Classes
+### Classes
 
 | Class | Description |
 |-------|-------------|
 {% for class in namespace.classes|sort((a,b) => a.FullyQualifiedStructuralElementName <=> b.FullyQualifiedStructuralElementName) %}
-| {{ macros.mdClassLink(class) }} | {{ class.summary|replace({'|': '&#124;'})|nl2br|replace({"\n": "", "\r": "", "\t": ""})|raw }}|
-{% endfor %}{# for class #}
-{% endif %}{# if classes.length #}
+| {{ macros.mdClassLink(class) }} | {{ macros.mdCell(class.summary) }} |
+{% endfor %}
 
+{% endif %}
 {% if namespace.traits|length > 0 %}
-
-#### Traits
+### Traits
 
 | Trait | Description |
 |-------|-------------|
 {% for trait in namespace.traits|sort((a,b) => a.FullyQualifiedStructuralElementName <=> b.FullyQualifiedStructuralElementName) %}
-| {{ macros.mdClassLink(trait) }} | {{ trait.summary|replace({'|': '&#124;'})|nl2br|replace({"\n": "", "\r": "", "\t": ""})|raw }}|
-{% endfor %}{# for trait #}
-{% endif %}{# if traits #}
+| {{ macros.mdClassLink(trait) }} | {{ macros.mdCell(trait.summary) }} |
+{% endfor %}
 
+{% endif %}
 {% if namespace.interfaces|length > 0 %}
-
-#### Interfaces
+### Interfaces
 
 | Interface | Description |
 |-----------|-------------|
 {% for interface in namespace.interfaces|sort((a,b) => a.FullyQualifiedStructuralElementName <=> b.FullyQualifiedStructuralElementName) %}
-| {{ macros.mdClassLink(interface) }} | {{ interface.summary|replace({'|': '&#124;'})|nl2br|replace({"\n": "", "\r": "", "\t": ""})|raw }}|
-{% endfor %}{# for interace #}
-{% endif %}{# if interfaces #}
+| {{ macros.mdClassLink(interface) }} | {{ macros.mdCell(interface.summary) }} |
+{% endfor %}
 
-
+{% endif %}
 {% if namespace.enums|length > 0 %}
-#### Enums
+### Enums
 
 | Enum | Description |
 |-------|-------------|
 {% for enum in namespace.enums|sort((a,b) => a.FullyQualifiedStructuralElementName <=> b.FullyQualifiedStructuralElementName) %}
-| {{ macros.mdClassLink(enum) }} | {{ enum.summary|replace({'|': '&#124;'})|nl2br|replace({"\n": "", "\r": "", "\t": ""})|raw }}|
-{% endfor %}{# for enum #}
-{% endif %}{# if enums.length #}
+| {{ macros.mdClassLink(enum) }} | {{ macros.mdCell(enum.summary) }} |
+{% endfor %}
 
-{% endfor %}{# for namespace #}
-
+{% endif %}
+{% endif %}
+{% endfor %}
 {% include 'config/footer.md.twig' %}
 {% endblock %}

@@ -56,7 +56,60 @@
 [`{{ name | default(nodeOrNamespace.name) | default('Unknown') }}`]({{ _self.mdGetRelativePath(relativeTo, _self.mdClassPath(nodeOrNamespace))}}){% endmacro %}
 
 {#
+  Reference to an element that may or may not be part of this project.
+  Elements documented in this project (descriptors) get a relative link; anything else
+  (e.g. a built-in PHP interface such as \JsonSerializable) is rendered as plain code.
+  @param $element object Descriptor or Fqsen
+  @param $relativeTo string The path to make relative to
+#}
+{% macro mdElementRef(element, relativeTo) %}
+{% if element.summary is defined %}{{ _self.mdClassLink(element, relativeTo, element.FullyQualifiedStructuralElementName) }}{% else %}`{{ element }}`{% endif %}{% endmacro %}
+
+{#
   Escape markdown special characters
   @param $text string The text to escape
 #}
 {% macro mdEsc(text) %}{{ text | replace({'|':'&#124;'}) | raw }}{% endmacro %}
+
+{#
+  One-line, table-safe rendering of a description
+  @param $text string|object The text to flatten
+#}
+{% macro mdCell(text) %}{{ text | replace({'|': '&#124;', "\r": "", "\n": " ", "\t": " "}) | trim | raw }}{% endmacro %}
+
+{#
+  Render a list of @see / @link tags, if any. Output ends with a blank line.
+  @param $element object Descriptor with .tags
+#}
+{% macro mdSeeAlso(element) %}
+{% if element.tags.see is not empty or element.tags.link is not empty %}
+**See Also:**
+
+{% for see in element.tags.see %}
+* {{ see.reference }}{% if see.description is not empty %} - {{ see.description | raw }}{% endif %}
+
+{% endfor %}
+{% for link in element.tags.link %}
+* {{ link.link }}{% if link.description is not empty and link.description != link.link %} - {{ link.description | raw }}{% endif %}
+
+{% endfor %}
+
+{% endif %}{% endmacro %}
+
+{#
+  Render the header part shared by class-like pages: title, summary, description.
+  Output ends with a blank line.
+  @param $node object Class/Interface/Trait/Enum descriptor
+#}
+{% macro mdElementHeader(node) %}
+# {{ node.name }}
+
+{% if node.summary is not empty %}
+{{ node.summary | raw }}
+
+{% endif %}
+{% if node.description is not empty %}
+{{ node.description | raw }}
+
+{% endif %}
+{% endmacro %}

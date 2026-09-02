@@ -1,5 +1,3 @@
-***
-
 # DateRange
 
 Class DateRange
@@ -9,13 +7,9 @@ Ranges that contain a single date are allowed (IE the start and end date are the
 Ranges that contain no dates are impossible
 
 * Full name: `\MadisonSolutions\JustDate\DateRange`
-* This class implements:
-[`\MadisonSolutions\JustDate\DateRangeList`](./DateRangeList.md), [`\JsonSerializable`](../../JsonSerializable.md)
-
-
+* Implements: [`\MadisonSolutions\JustDate\DateRangeList`](./DateRangeList.md), `\JsonSerializable`
 
 ## Properties
-
 
 ### start
 
@@ -24,11 +18,6 @@ The start of the range
 ```php
 public \MadisonSolutions\JustDate\JustDate $start
 ```
-
-
-
-
-
 
 ***
 
@@ -39,11 +28,6 @@ The end of the range
 ```php
 public \MadisonSolutions\JustDate\JustDate $end
 ```
-
-
-
-
-
 
 ***
 
@@ -56,11 +40,6 @@ So if $start and $end are the same date (shortest possible DateRange), $inner_le
 public int $inner_length
 ```
 
-
-
-
-
-
 ***
 
 ### outer_length
@@ -72,15 +51,9 @@ So if $start and $end are the same date (shortest possible DateRange), $outer_le
 public positive-int $outer_length
 ```
 
-
-
-
-
-
 ***
 
 ## Methods
-
 
 ### make
 
@@ -90,22 +63,14 @@ Create a new DateRange object from start and end dates
 public static make(\MadisonSolutions\JustDate\JustDate $start, \MadisonSolutions\JustDate\JustDate $end): \MadisonSolutions\JustDate\DateRange
 ```
 
-
-
 * This method is **static**.
-
-
-
 
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$start` | **\MadisonSolutions\JustDate\JustDate** | Start of range |
-| `$end` | **\MadisonSolutions\JustDate\JustDate** | End of range |
-
-
-
+| `$start` | `\MadisonSolutions\JustDate\JustDate` | Start of range |
+| `$end` | `\MadisonSolutions\JustDate\JustDate` | End of range |
 
 ***
 
@@ -122,22 +87,16 @@ whichever of the 2 dates is latest.
 
 * This method is **static**.
 
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$a` | **\MadisonSolutions\JustDate\JustDate** | Start or end of range |
-| `$b` | **\MadisonSolutions\JustDate\JustDate** | Other side of range |
-
+| `$a` | `\MadisonSolutions\JustDate\JustDate` | Start or end of range |
+| `$b` | `\MadisonSolutions\JustDate\JustDate` | Other side of range |
 
 **Return Value:**
 
 The DateRange object
-
-
 
 ***
 
@@ -149,26 +108,18 @@ Create a new DateRange object from start and end date as Y-m-d formatted strings
 public static fromYmd(string $start, string $end): \MadisonSolutions\JustDate\DateRange
 ```
 
-
-
 * This method is **static**.
-
-
-
 
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$start` | **string** | Start of range, in Y-m-d format |
-| `$end` | **string** | End of range, in Y-m-d format |
-
+| `$start` | `string` | Start of range, in Y-m-d format |
+| `$end` | `string` | End of range, in Y-m-d format |
 
 **Return Value:**
 
 The DateRange object
-
-
 
 ***
 
@@ -180,26 +131,18 @@ Create a new DateRange object by specifying the start date and the inner length 
 public static fromStartAndInnerLength(\MadisonSolutions\JustDate\JustDate $start, int $inner_length): \MadisonSolutions\JustDate\DateRange
 ```
 
-
-
 * This method is **static**.
-
-
-
 
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$start` | **\MadisonSolutions\JustDate\JustDate** | Start of range |
-| `$inner_length` | **int** |  |
-
+| `$start` | `\MadisonSolutions\JustDate\JustDate` | Start of range |
+| `$inner_length` | `int` |  |
 
 **Return Value:**
 
 The DateRange object
-
-
 
 ***
 
@@ -211,26 +154,18 @@ Create a new DateRange object by specifying the start date and the outer length 
 public static fromStartAndOuterLength(\MadisonSolutions\JustDate\JustDate $start, positive-int $outer_length): \MadisonSolutions\JustDate\DateRange
 ```
 
-
-
 * This method is **static**.
-
-
-
 
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$start` | **\MadisonSolutions\JustDate\JustDate** | Start of range |
-| `$outer_length` | **positive-int** | The desired outer length of the range |
-
+| `$start` | `\MadisonSolutions\JustDate\JustDate` | Start of range |
+| `$outer_length` | `positive-int` | The desired outer length of the range |
 
 **Return Value:**
 
 The DateRange object
-
-
 
 ***
 
@@ -247,24 +182,18 @@ So for example, it is ok to specify +1 month and -5 days as that will always be 
 
 * This method is **static**.
 
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$start` | **\MadisonSolutions\JustDate\JustDate** | Start of range |
-| `$years` | **int** | The number of years of the duration (default 0) |
-| `$months` | **int** | The number of months of the duration (default 0) |
-| `$days` | **int** | The number of days of the duration (default 0) |
-
+| `$start` | `\MadisonSolutions\JustDate\JustDate` | Start of range |
+| `$years` | `int` | The number of years of the duration (default 0) |
+| `$months` | `int` | The number of months of the duration (default 0) |
+| `$days` | `int` | The number of days of the duration (default 0) |
 
 **Return Value:**
 
 The DateRange object
-
-
 
 ***
 
@@ -281,24 +210,18 @@ So for example, it is ok to specify +1 month and -5 days as that will always be 
 
 * This method is **static**.
 
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$end` | **\MadisonSolutions\JustDate\JustDate** | End of range |
-| `$years` | **int** | The number of years of the duration (default 0) |
-| `$months` | **int** | The number of months of the duration (default 0) |
-| `$days` | **int** | The number of days of the duration (default 0) |
-
+| `$end` | `\MadisonSolutions\JustDate\JustDate` | End of range |
+| `$years` | `int` | The number of years of the duration (default 0) |
+| `$months` | `int` | The number of months of the duration (default 0) |
+| `$days` | `int` | The number of days of the duration (default 0) |
 
 **Return Value:**
 
 The DateRange object
-
-
 
 ***
 
@@ -314,15 +237,9 @@ Start date will be the first day of the current month and end date will be the l
 
 * This method is **static**.
 
-
-
-
-
 **Return Value:**
 
 The DateRange object
-
-
 
 ***
 
@@ -339,21 +256,15 @@ By default, Monday is taken to be the 'first' day of the week, but this can be o
 
 * This method is **static**.
 
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$week_starts_on` | **\MadisonSolutions\JustDate\DayOfWeek** | Optionally specify which day of the week to be considered as the &#039;first&#039;, default is Monday |
-
+| `$week_starts_on` | `\MadisonSolutions\JustDate\DayOfWeek` | Optionally specify which day of the week to be considered as the 'first', default is Monday |
 
 **Return Value:**
 
 The DateRange object
-
-
 
 ***
 
@@ -369,15 +280,9 @@ Start date will be January 1st of the current year and end date will be December
 
 * This method is **static**.
 
-
-
-
-
 **Return Value:**
 
 The DateRange object
-
-
 
 ***
 
@@ -393,22 +298,16 @@ If $r1 and $r2 have no intersection and are totally separate, then this function
 
 * This method is **static**.
 
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$r1` | **\MadisonSolutions\JustDate\DateRange** | The first range |
-| `$r2` | **\MadisonSolutions\JustDate\DateRange** | The second range |
-
+| `$r1` | `\MadisonSolutions\JustDate\DateRange` | The first range |
+| `$r2` | `\MadisonSolutions\JustDate\DateRange` | The second range |
 
 **Return Value:**
 
 The intersection DateRange object or null
-
-
 
 ***
 
@@ -421,16 +320,6 @@ IE start date and end date are the same
 public isSingleDay(): bool
 ```
 
-
-
-
-
-
-
-
-
-
-
 ***
 
 ### __toString
@@ -440,16 +329,6 @@ Standard string representation is eg '2019-04-21 to 2019-04-25'
 ```php
 public __toString(): string
 ```
-
-
-
-
-
-
-
-
-
-
 
 ***
 
@@ -461,16 +340,6 @@ Json representation is object with 'start' and 'end' properties
 public jsonSerialize(): array{start: string, end: string}
 ```
 
-
-
-
-
-
-
-
-
-
-
 ***
 
 ### each
@@ -478,24 +347,14 @@ public jsonSerialize(): array{start: string, end: string}
 Get a generator which yields each date in the range (inclusive of end points) as a JustDate object
 
 ```php
-public each(bool $backwards = false): \Generator&lt;int,\MadisonSolutions\JustDate\JustDate&gt;
+public each(bool $backwards = false): \Generator<int,\MadisonSolutions\JustDate\JustDate>
 ```
-
-
-
-
-
-
-
 
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$backwards` | **bool** | If true the dates will be returned in reverse order (default false). |
-
-
-
+| `$backwards` | `bool` | If true the dates will be returned in reverse order (default false). |
 
 ***
 
@@ -504,24 +363,14 @@ public each(bool $backwards = false): \Generator&lt;int,\MadisonSolutions\JustDa
 Get a generator which yields each date in the range (including start but not end) as a JustDate object
 
 ```php
-public eachExceptLast(bool $backwards = false): \Generator&lt;int,\MadisonSolutions\JustDate\JustDate&gt;
+public eachExceptLast(bool $backwards = false): \Generator<int,\MadisonSolutions\JustDate\JustDate>
 ```
-
-
-
-
-
-
-
 
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$backwards` | **bool** | If true the dates will be returned in reverse order, starting with the end date, up to but not including the start date (default false). |
-
-
-
+| `$backwards` | `bool` | If true the dates will be returned in reverse order, starting with the end date, up to but not including the start date (default false). |
 
 ***
 
@@ -533,25 +382,15 @@ Test whether a particular DateRange is the same as this one - IE has the same st
 public isSameAs(\MadisonSolutions\JustDate\DateRange $range): bool
 ```
 
-
-
-
-
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$range` | **\MadisonSolutions\JustDate\DateRange** | The DateRange to compare with |
-
+| `$range` | `\MadisonSolutions\JustDate\DateRange` | The DateRange to compare with |
 
 **Return Value:**
 
 True if the $range has the same start and end dates as this range, false otherwise
-
-
 
 ***
 
@@ -563,25 +402,15 @@ Test whether a particular date lies within this range
 public includes(\MadisonSolutions\JustDate\JustDate $date): bool
 ```
 
-
-
-
-
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$date` | **\MadisonSolutions\JustDate\JustDate** | The date to test |
-
+| `$date` | `\MadisonSolutions\JustDate\JustDate` | The date to test |
 
 **Return Value:**
 
 True if the date is within this range (including endpoints), false otherwise
-
-
 
 ***
 
@@ -593,25 +422,15 @@ Test whether a particular date range is completely contained within this range
 public contains(\MadisonSolutions\JustDate\DateRange $range): bool
 ```
 
-
-
-
-
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$range` | **\MadisonSolutions\JustDate\DateRange** | The range to test |
-
+| `$range` | `\MadisonSolutions\JustDate\DateRange` | The range to test |
 
 **Return Value:**
 
 True if $range is completely contained within this range, false otherwise
-
-
 
 ***
 
@@ -620,7 +439,7 @@ True if $range is completely contained within this range, false otherwise
 Get a generator which splits the range into subranges
 
 ```php
-public eachSubRange(callable $value_fn, bool $backwards = false): \Generator&lt;int,array{range: \MadisonSolutions\JustDate\DateRange, value: \MadisonSolutions\JustDate\T}&gt;
+public eachSubRange(callable $value_fn, bool $backwards = false): \Generator<int,array{range: \MadisonSolutions\JustDate\DateRange, value: \MadisonSolutions\JustDate\T}>
 ```
 
 The supplied callback function will be applied to each date in the range,
@@ -631,22 +450,13 @@ This function returns a generator which will yield each of these contiguous
 subranges in turn, together with the callback value. The yield values will
 be in the format of an array with 'value' and 'range' keys.
 
-
-
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$value_fn` | **callable** | Callback used to determine how to delimit the subranges<br />Each subrange will contain dates for which the callback returns<br />the same value. |
-| `$backwards` | **bool** | If true the subranges will be returned in reverse order (default false). |
-
-
-
+| `$value_fn` | `callable` | Callback used to determine how to delimit the subranges Each subrange will contain dates for which the callback returns the same value. |
+| `$backwards` | `bool` | If true the subranges will be returned in reverse order (default false). |
 
 ***
 
-***
-> Automatically generated from source code comments using [phpDocumentor](http://www.phpdoc.org/)
+> Automatically generated from source code comments using [phpDocumentor](https://www.phpdoc.org/)

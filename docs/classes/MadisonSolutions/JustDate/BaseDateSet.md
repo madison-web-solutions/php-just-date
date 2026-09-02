@@ -1,5 +1,3 @@
-***
-
 # BaseDateSet
 
 Class BaseDateSet
@@ -7,22 +5,17 @@ Class BaseDateSet
 Base class for DateSet and MutableDateSet
 
 * Full name: `\MadisonSolutions\JustDate\BaseDateSet`
-* This class implements:
-[`\MadisonSolutions\JustDate\DateRangeList`](./DateRangeList.md), [`\JsonSerializable`](../../JsonSerializable.md)
-* This class is an **Abstract class**
-
-
-
+* Implements: [`\MadisonSolutions\JustDate\DateRangeList`](./DateRangeList.md), `\JsonSerializable`
+* This class is **abstract**
 
 ## Methods
-
 
 ### sortedRangesFromSingleDates
 
 Utility function that takes any number of JustDate objects and turns them into a normalized list of DateRanges
 
 ```php
-public static sortedRangesFromSingleDates(\MadisonSolutions\JustDate\JustDate $dates): \MadisonSolutions\JustDate\DateRange[]
+public static sortedRangesFromSingleDates(\MadisonSolutions\JustDate\JustDate $dates): list<\MadisonSolutions\JustDate\DateRange>
 ```
 
 Any consecutive dates in the input will be merged into a single range
@@ -31,47 +24,31 @@ The resulting list of ranges will be sorted and disjoint
 
 * This method is **static**.
 
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$dates` | **\MadisonSolutions\JustDate\JustDate** | The input dates |
-
+| `$dates` | `\MadisonSolutions\JustDate\JustDate` | The input dates |
 
 **Return Value:**
 
 Resulting normalized list of ranges
 
-
-
 ***
 
 ### __construct
-
-
 
 ```php
 public __construct(\MadisonSolutions\JustDate\DateRangeList $lists): mixed
 ```
 
-
-
-
 * This method is **abstract**.
-
-
 
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$lists` | **\MadisonSolutions\JustDate\DateRangeList** |  |
-
-
-
+| `$lists` | `\MadisonSolutions\JustDate\DateRangeList` |  |
 
 ***
 
@@ -83,21 +60,11 @@ Determine whether the given date is a member of this set
 public includes(\MadisonSolutions\JustDate\JustDate $date): bool
 ```
 
-
-
-
-
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$date` | **\MadisonSolutions\JustDate\JustDate** |  |
-
-
-
+| `$date` | `\MadisonSolutions\JustDate\JustDate` |  |
 
 ***
 
@@ -112,19 +79,11 @@ public subtract(\MadisonSolutions\JustDate\DateRangeList $list_to_cut): static
 The dates in the resulting object will be those that are contained in this set but are not contained
 in the supplied object. Returns a new set (does not mutate $this)
 
-
-
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$list_to_cut` | **\MadisonSolutions\JustDate\DateRangeList** |  |
-
-
-
+| `$list_to_cut` | `\MadisonSolutions\JustDate\DateRangeList` |  |
 
 ***
 
@@ -136,19 +95,9 @@ Determine whether this set is empty
 public isEmpty(): bool
 ```
 
-
-
-
-
-
-
-
-
 **Return Value:**
 
 True if this set is empty (IE contains no dates), false otherwise
-
-
 
 ***
 
@@ -164,17 +113,9 @@ Fetch the single date range that covers all the dates in this set
 IE the returned range will start with the earliest date in this set, and finish with the latest
 Returns null in case this set is empty
 
-
-
-
-
-
-
 **Return Value:**
 
 The spanning DateRange, or null if this set is empty
-
-
 
 ***
 
@@ -183,24 +124,14 @@ The spanning DateRange, or null if this set is empty
 Get a generator which yields each range in the set as a DateRange object
 
 ```php
-public eachRange(bool $backwards = false): \Generator&lt;int,\MadisonSolutions\JustDate\DateRange&gt;
+public eachRange(bool $backwards = false): \Generator<int,\MadisonSolutions\JustDate\DateRange>
 ```
-
-
-
-
-
-
-
 
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$backwards` | **bool** | If true the ranges will be returned in reverse order (default false). |
-
-
-
+| `$backwards` | `bool` | If true the ranges will be returned in reverse order (default false). |
 
 ***
 
@@ -209,24 +140,14 @@ public eachRange(bool $backwards = false): \Generator&lt;int,\MadisonSolutions\J
 Get a generator which yields each date in the set as a JustDate object
 
 ```php
-public eachDate(bool $backwards = false): \Generator&lt;int,\MadisonSolutions\JustDate\JustDate&gt;
+public eachDate(bool $backwards = false): \Generator<int,\MadisonSolutions\JustDate\JustDate>
 ```
-
-
-
-
-
-
-
 
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$backwards` | **bool** | If true the dates will be returned in reverse order (default false). |
-
-
-
+| `$backwards` | `bool` | If true the dates will be returned in reverse order (default false). |
 
 ***
 
@@ -235,26 +156,18 @@ public eachDate(bool $backwards = false): \Generator&lt;int,\MadisonSolutions\Ju
 Get a generator which yields whether or not each date in the window range belongs to this set
 
 ```php
-public window(\MadisonSolutions\JustDate\DateRange $window): \Generator&lt;int,array{0: \MadisonSolutions\JustDate\JustDate, 1: bool}&gt;
+public window(\MadisonSolutions\JustDate\DateRange $window): \Generator<int,array{0: \MadisonSolutions\JustDate\JustDate, 1: bool}>
 ```
 
 Specifically, the generator will yield an array for each each date in the window range in order
 The first element of the array will be the JustDate object for that date
 The second, a boolean, true if the date belongs to this set, and false otherwise.
 
-
-
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$window` | **\MadisonSolutions\JustDate\DateRange** |  |
-
-
-
+| `$window` | `\MadisonSolutions\JustDate\DateRange` |  |
 
 ***
 
@@ -266,16 +179,6 @@ Get the string representation of this set
 public __toString(): string
 ```
 
-
-
-
-
-
-
-
-
-
-
 ***
 
 ### getRanges
@@ -283,18 +186,8 @@ public __toString(): string
 Get the normalized list of ranges as a plain PHP array
 
 ```php
-public getRanges(): \MadisonSolutions\JustDate\DateRange[]
+public getRanges(): list<\MadisonSolutions\JustDate\DateRange>
 ```
-
-
-
-
-
-
-
-
-
-
 
 ***
 
@@ -303,18 +196,8 @@ public getRanges(): \MadisonSolutions\JustDate\DateRange[]
 Json representation is array of ranges
 
 ```php
-public jsonSerialize(): list&lt;array{start: string, end: string}&gt;
+public jsonSerialize(): list<array{start: string, end: string}>
 ```
-
-
-
-
-
-
-
-
-
-
 
 ***
 
@@ -326,21 +209,13 @@ Unserialize by parsing the standard string representation
 public static fromString(string $serialized): static
 ```
 
-
-
 * This method is **static**.
-
-
-
 
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$serialized` | **string** |  |
-
-
-
+| `$serialized` | `string` |  |
 
 ***
 
@@ -352,25 +227,15 @@ Test whether the given object consists of the exact same set of dates as this on
 public isSameAs(\MadisonSolutions\JustDate\DateRangeList $other): bool
 ```
 
-
-
-
-
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$other` | **\MadisonSolutions\JustDate\DateRangeList** | An object implementing DateRangeList to compare with (JustDate, DateRange, DateSet or MutableDateSet) |
-
+| `$other` | `\MadisonSolutions\JustDate\DateRangeList` | An object implementing DateRangeList to compare with (JustDate, DateRange, DateSet or MutableDateSet) |
 
 **Return Value:**
 
 True if the set of dates in $other is exactly the same as the set of dates in this set, false otherwise
-
-
 
 ***
 
@@ -384,25 +249,16 @@ public contains(\MadisonSolutions\JustDate\DateRangeList $other): bool
 
 Note: returns true if $other is an empty DateSet or MutableDateSet.
 
-
-
-
-
-
 **Parameters:**
 
 | Parameter | Type | Description |
 |-----------|------|-------------|
-| `$other` | **\MadisonSolutions\JustDate\DateRangeList** | An object implementing DateRangeList to compare with (JustDate, DateRange, DateSet or MutableDateSet) |
-
+| `$other` | `\MadisonSolutions\JustDate\DateRangeList` | An object implementing DateRangeList to compare with (JustDate, DateRange, DateSet or MutableDateSet) |
 
 **Return Value:**
 
 True if this set contains all of the dates in $other, false otherwise
 
-
-
 ***
 
-***
-> Automatically generated from source code comments using [phpDocumentor](http://www.phpdoc.org/)
+> Automatically generated from source code comments using [phpDocumentor](https://www.phpdoc.org/)

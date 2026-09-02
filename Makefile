@@ -35,7 +35,9 @@ define run_all
 	test -z "$$failed"
 endef
 
-.PHONY: help build install composer test test-all phpstan phpstan-all pint check php shell
+PHPDOC_IMAGE ?= phpdoc/phpdoc:3
+
+.PHONY: help build install composer test test-all phpstan phpstan-all pint docs docs-check check php shell
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-14s\033[0m %s\n", $$1, $$2}'
@@ -65,10 +67,24 @@ phpstan-all: ## Run PHPStan under every supported PHP version
 pint: ## Run Pint (fixes files; use ARGS=--test to only check)
 	$(RUN) vendor/bin/pint $(ARGS)
 
-check: ## Run tests and PHPStan under every version, then Pint in check mode
+docs: ## Regenerate the API reference in docs/ from the docblocks in src/ (uses phpDocumentor's own image)
+	docker run --rm -v "$(CURDIR):/data" $(PHPDOC_IMAGE) $(ARGS)
+
+docs-check: ## Regenerate docs/ and fail if the result differs from what is committed
+	$(MAKE) --no-print-directory docs ARGS=--quiet
+	@if [ -n "$$(git status --porcelain -- docs)" ]; then \
+		printf '\033[1;31mdocs/ is out of date. Run `make docs` and commit the result:\033[0m\n'; \
+		git status --short -- docs; \
+		exit 1; \
+	else \
+		printf '\033[1;32mdocs/ is up to date\033[0m\n'; \
+	fi
+
+check: ## Run tests and PHPStan under every version, then Pint in check mode, then docs-check
 	$(MAKE) --no-print-directory test-all
 	$(MAKE) --no-print-directory phpstan-all
 	$(MAKE) --no-print-directory pint ARGS=--test
+	$(MAKE) --no-print-directory docs-check
 
 php: ## Run php with ARGS in the selected PHP version, e.g. make php ARGS="-r 'echo PHP_VERSION;'"
 	$(RUN) php $(ARGS)

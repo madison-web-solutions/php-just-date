@@ -1,0 +1,16 @@
+{% set properties = properties(node) %}
+{% if properties is not empty %}
+## Properties
+
+{% for property in properties %}
+{% include 'property.md.twig' %}
+{% endfor %}
+{% endif %}
+{% set methods = methods(node) %}
+{% if methods is not empty %}
+## Methods
+
+{% for method in methods %}
+{% include 'method.md.twig' %}
+{% endfor %}
+{% endif %}

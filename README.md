@@ -234,6 +234,78 @@ $range->inner_length; // 4
 $range->outer_length; // 5
 ```
 
+## MonthAndYear
+
+Represents a particular month in a particular year, with no day or time information.  Useful when month + year is the appropriate level of accuracy for your data (billing periods, monthly reports and so on).
+
+```php
+use MadisonSolutions\JustDate\JustDate;
+use MadisonSolutions\JustDate\MonthAndYear;
+
+$m = MonthAndYear::make(2026, 9);
+(string) $m;
+// 2026-09
+
+// alternatively create from a string, from a date, or get the current month
+$m = MonthAndYear::fromYm('2026-09');
+$m = JustDate::fromYmd('2026-09-15')->monthAndYear();
+$m = MonthAndYear::thisMonth();
+
+$m->year;
+// 2026
+$m->month;
+// 9
+
+$m->format('F Y');
+// September 2026
+```
+
+### Traversing the calendar
+
+```php
+$m = MonthAndYear::make(2026, 9);
+
+(string) $m->addMonths(4);
+// 2027-01
+(string) $m->subYears(1);
+// 2025-09
+(string) $m->next();
+// 2026-10
+
+MonthAndYear::difference($m, MonthAndYear::make(2027, 3));
+// 6
+
+$m->isBefore(MonthAndYear::make(2026, 10));
+// true
+
+// Like JustDate::make(), out of range values are adjusted rather than rejected
+(string) MonthAndYear::make(2026, 13);
+// 2027-01
+```
+
+### Converting to dates and ranges
+
+```php
+$m = MonthAndYear::make(2026, 9);
+
+(string) $m->firstDate();
+// 2026-09-01
+(string) $m->lastDate();
+// 2026-09-30
+(string) $m->range();
+// 2026-09-01 to 2026-09-30
+$m->numDays();
+// 30
+
+$m->includes(JustDate::fromYmd('2026-09-15'));
+// true
+
+// A MonthAndYear can be used anywhere the library accepts a JustDate or DateRange as input
+$set = new DateSet($m, JustDate::fromYmd('2026-10-05'));
+(string) $set;
+// 2026-09-01 to 2026-09-30, 2026-10-05
+```
+
 ## JustTime
 
 Represents a time without any date information.

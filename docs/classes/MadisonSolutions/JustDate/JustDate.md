@@ -756,6 +756,20 @@ The new JustDate object
 
 ***
 
+### monthAndYear
+
+Get the MonthAndYear object for the month containing this date
+
+```php
+public monthAndYear(): \MadisonSolutions\JustDate\MonthAndYear
+```
+
+**Return Value:**
+
+The new MonthAndYear object
+
+***
+
 ### addDaysPassingTest
 
 Add the given number of dates which pass the test function

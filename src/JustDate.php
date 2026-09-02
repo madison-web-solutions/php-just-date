@@ -571,6 +571,16 @@ class JustDate implements DateRangeList, JsonSerializable
     }
 
     /**
+     * Get the MonthAndYear object for the month containing this date
+     *
+     * @return MonthAndYear The new MonthAndYear object
+     */
+    public function monthAndYear(): MonthAndYear
+    {
+        return MonthAndYear::fromDate($this);
+    }
+
+    /**
      * Add the given number of dates which pass the test function
      * Typical use is to add a number of 'working days' to a date, where the test function identifies the 'working' dates
      * Note if $num_to_add is zero (or negative) the behaviour is to advance to the first date that does pass the test and return it

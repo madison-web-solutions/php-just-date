@@ -11,6 +11,7 @@
 | [`DateSet`](./classes/MadisonSolutions/JustDate/DateSet.md) | Class DateSet |
 | [`JustDate`](./classes/MadisonSolutions/JustDate/JustDate.md) | Class JustDate |
 | [`JustTime`](./classes/MadisonSolutions/JustDate/JustTime.md) | Class JustTime |
+| [`MonthAndYear`](./classes/MadisonSolutions/JustDate/MonthAndYear.md) | Class MonthAndYear |
 | [`MutableDateSet`](./classes/MadisonSolutions/JustDate/MutableDateSet.md) | Class MutableDateSet |
 
 ### Interfaces

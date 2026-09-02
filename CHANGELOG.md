@@ -4,6 +4,8 @@
 
 ### Added
  - Added `atTime()` method to JustDate (alias for `toDateTime()` with a required time) and the complementary `onDate()` method to JustTime
+ - Added `MonthAndYear` class representing a month in a particular year, with no day or time information
+ - Added `monthAndYear()` method to JustDate
 
 
 

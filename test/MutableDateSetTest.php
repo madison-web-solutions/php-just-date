@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 class MutableDateSetTest extends TestCase
 {
-    public function testConstructing(): void
+    public function test_constructing(): void
     {
         $params = [
             [
@@ -64,7 +64,7 @@ class MutableDateSetTest extends TestCase
         $this->assertEquals('2021-04-10 to 2021-04-11', (string) $set);
     }
 
-    public function testAddingRanges(): void
+    public function test_adding_ranges(): void
     {
         $set = new MutableDateSet;
         $this->assertEquals('', (string) $set);
@@ -110,7 +110,7 @@ class MutableDateSetTest extends TestCase
         $this->assertEquals('2021-01-01 to 2021-05-20', (string) $set);
     }
 
-    public function testAddingDates(): void
+    public function test_adding_dates(): void
     {
         $set = new MutableDateSet;
         $this->assertEquals('', (string) $set);
@@ -135,7 +135,7 @@ class MutableDateSetTest extends TestCase
         $this->assertEquals('2021-04-01 to 2021-04-05', (string) $set);
     }
 
-    public function testAddingSets(): void
+    public function test_adding_sets(): void
     {
         $set = new MutableDateSet;
 
@@ -161,7 +161,7 @@ class MutableDateSetTest extends TestCase
         $this->assertEquals('2021-03-01 to 2021-05-06', (string) $set);
     }
 
-    public function testRemoving(): void
+    public function test_removing(): void
     {
         $set = new MutableDateSet(DateRange::fromYmd('2021-02-01', '2021-05-30'));
 
@@ -214,7 +214,7 @@ class MutableDateSetTest extends TestCase
         $this->assertEquals('', (string) $set);
     }
 
-    public function testSubtracting(): void
+    public function test_subtracting(): void
     {
         $set = new MutableDateSet(DateRange::fromYmd('2021-02-01', '2021-05-30'));
 
@@ -267,7 +267,7 @@ class MutableDateSetTest extends TestCase
         $this->assertEquals('', (string) $set);
     }
 
-    public function testIntersections(): void
+    public function test_intersections(): void
     {
         $set0 = new MutableDateSet;
         $set1 = new MutableDateSet(DateRange::fromYmd('2021-02-01', '2021-05-30'));
@@ -306,7 +306,7 @@ class MutableDateSetTest extends TestCase
         $this->assertEquals('2021-03-01 to 2021-03-02, 2021-04-20', (string) $set);
     }
 
-    public function testIncludes(): void
+    public function test_includes(): void
     {
         $set = new MutableDateSet(
             DateRange::fromYmd('2021-04-10', '2021-04-20'),

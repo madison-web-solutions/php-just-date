@@ -14,7 +14,7 @@ class DateTest extends TestCase
     /**
      * Helper method for verifying the expected exception is thrown when the callback is executed
      *
-     * @param class-string<object> $exceptionClass
+     * @param  class-string<object>  $exceptionClass
      */
     protected function assertThrows(string $exceptionClass, callable $callback): void
     {
@@ -38,13 +38,13 @@ class DateTest extends TestCase
         $this->assertSame($expectedYmd, (string) $actual);
     }
 
-    public function testCreateJustDates(): void
+    public function test_create_just_dates(): void
     {
         $d = JustDate::make(2019, 4, 21);
         $this->assertJustDate('2019-04-21', $d);
     }
 
-    public function testCreateFromDateTime(): void
+    public function test_create_from_date_time(): void
     {
         // Create a PHP DateTime object with the given date, time and timezone
         /** @noinspection PhpUnhandledExceptionInspection */
@@ -68,7 +68,7 @@ class DateTest extends TestCase
         $this->assertTrue($d1->isSameAs($d2));
     }
 
-    public function testCreateToday(): void
+    public function test_create_today(): void
     {
         $d1 = JustDate::today();
         $this->assertJustDate(date('Y-m-d'), $d1);
@@ -88,7 +88,7 @@ class DateTest extends TestCase
         $this->assertJustDate(date('Y-m-d', strtotime('tomorrow')), $d6);
     }
 
-    public function testCreateFromTimestamp(): void
+    public function test_create_from_timestamp(): void
     {
         // Create the timestamp for 2019-04-21 16:23 in UTC
         $ts = gmmktime(16, 23, 12, 4, 21, 2019);
@@ -107,13 +107,13 @@ class DateTest extends TestCase
         $this->assertJustDate('2019-04-22', $d3);
     }
 
-    public function testCreateFromYmd(): void
+    public function test_create_from_ymd(): void
     {
         $d1 = JustDate::fromYmd('2019-04-21');
         $this->assertJustDate('2019-04-21', $d1);
     }
 
-    public function testCannotCreateFromInvalidYmd(): void
+    public function test_cannot_create_from_invalid_ymd(): void
     {
         $this->assertThrows(InvalidArgumentException::class, function () {
             JustDate::fromYmd('foo');
@@ -128,7 +128,7 @@ class DateTest extends TestCase
         });
     }
 
-    public function testEpochDay(): void
+    public function test_epoch_day(): void
     {
         $this->assertJustDate('1970-01-01', JustDate::fromEpochDay(0));
         $this->assertJustDate('1970-01-02', JustDate::fromEpochDay(1));
@@ -147,7 +147,7 @@ class DateTest extends TestCase
         $this->assertSame(365, JustDate::difference(JustDate::make(2018, 04, 21), JustDate::make(2019, 04, 21)));
     }
 
-    public function testGetters(): void
+    public function test_getters(): void
     {
         $d = JustDate::make(2019, 04, 21);
         $this->assertSame(2019, $d->year);
@@ -157,7 +157,7 @@ class DateTest extends TestCase
         $this->assertSame(gmmktime(0, 0, 0, 4, 21, 2019), $d->timestamp);
     }
 
-    public function testAddDays(): void
+    public function test_add_days(): void
     {
         $d1 = JustDate::make(2019, 04, 21);
         $this->assertJustDate('2019-04-22', $d1->addDays(1));
@@ -194,7 +194,7 @@ class DateTest extends TestCase
         // Note this means sometimes $d->addMonths(a)->addMonths(b) is not equal to $d->addMonths(a + b) !
     }
 
-    public function testSubDays(): void
+    public function test_sub_days(): void
     {
         $d1 = JustDate::make(2019, 04, 21);
         $this->assertJustDate('2019-04-20', $d1->subDays(1));
@@ -223,7 +223,7 @@ class DateTest extends TestCase
         $this->assertJustDate('2021-01-30', (JustDate::make(2021, 03, 30))->subMonths(2));
     }
 
-    public function testFormat(): void
+    public function test_format(): void
     {
         /** @noinspection PhpUnhandledExceptionInspection */
         $p1 = new DateTime('2019-04-21 16:23:12', new DateTimeZone('Australia/Sydney'));
@@ -236,7 +236,7 @@ class DateTest extends TestCase
         $this->assertSame('Wed, 24 Apr 2019 00:00:00 +0000', $d2->format('r'));
     }
 
-    public function testComparisons(): void
+    public function test_comparisons(): void
     {
         $d1 = JustDate::make(2019, 04, 21);
         $d2 = JustDate::make(2019, 04, 22);
@@ -255,7 +255,7 @@ class DateTest extends TestCase
         $this->assertTrue($d1->isSameAs(JustDate::fromYmd('2019-04-21')));
     }
 
-    public function testDateTrickery(): void
+    public function test_date_trickery(): void
     {
         $d1 = JustDate::make(2019, 04, 0); // day = 0 gives last day of prev month
         $this->assertJustDate('2019-03-31', $d1);
@@ -264,14 +264,14 @@ class DateTest extends TestCase
         $this->assertJustDate('2018-12-31', $d2);
     }
 
-    public function testStartAndEndOfMonths(): void
+    public function test_start_and_end_of_months(): void
     {
         $d1 = JustDate::make(2019, 04, 21);
         $this->assertJustDate('2019-04-01', $d1->startOfMonth());
         $this->assertJustDate('2019-04-30', $d1->endOfMonth());
     }
 
-    public function testStartAndEndOfWeeks(): void
+    public function test_start_and_end_of_weeks(): void
     {
         $d1 = JustDate::make(2024, 8, 2); // Friday
         $this->assertJustDate('2024-07-29', $d1->startOfWeek()); // Monday
@@ -288,7 +288,7 @@ class DateTest extends TestCase
         $this->assertJustDate('2024-08-04', $d3->endOfWeek()); // Sunday
     }
 
-    public function testEarliestAndLatest(): void
+    public function test_earliest_and_latest(): void
     {
         $d1 = JustDate::make(2019, 04, 21);
         $this->assertJustDate('2019-04-21', JustDate::earliest($d1));
@@ -305,7 +305,7 @@ class DateTest extends TestCase
         $this->assertJustDate('2019-04-23', JustDate::latest($d3, $d2, $d1));
     }
 
-    public function testDaysOfTheWeek(): void
+    public function test_days_of_the_week(): void
     {
         $d0 = JustDate::make(2021, 03, 01); // Monday 1st March
         for ($i = 0; $i < 7; $i++) {
@@ -336,7 +336,7 @@ class DateTest extends TestCase
         }
     }
 
-    public function testConversionToDateTime(): void
+    public function test_conversion_to_date_time(): void
     {
         $default_timezone = new DateTimeZone(date_default_timezone_get());
         $tahiti = new DateTimeZone('Pacific/Tahiti');
@@ -364,7 +364,7 @@ class DateTest extends TestCase
         $this->assertEquals($tahiti, $td->getTimezone());
     }
 
-    public function testCompare(): void
+    public function test_compare(): void
     {
         $jan1 = JustDate::fromYmd('2024-01-01');
         $jan2 = JustDate::fromYmd('2024-01-02');
@@ -396,7 +396,7 @@ class DateTest extends TestCase
         $this->assertEquals($reverse_ordered, implode(', ', $dates_copy_3));
     }
 
-    public function testCreateRange(): void
+    public function test_create_range(): void
     {
         $d1 = JustDate::make(2019, 04, 21);
         $d2 = JustDate::make(2019, 04, 25);
@@ -495,7 +495,7 @@ class DateTest extends TestCase
         $this->assertDateRange(date('Y-01-01') . ' to ' . date('Y-12-31'), $r);
     }
 
-    public function testRangeGetters(): void
+    public function test_range_getters(): void
     {
         $r1 = DateRange::fromYmd('2019-04-21', '2019-04-25');
         $this->assertJustDate('2019-04-21', $r1->start);
@@ -510,7 +510,7 @@ class DateTest extends TestCase
         $this->assertSame(1, $r2->outer_length);
     }
 
-    public function testRangeIncludes(): void
+    public function test_range_includes(): void
     {
         $r1 = DateRange::fromYmd('2019-04-21', '2019-04-25');
         $this->assertFalse($r1->includes(JustDate::make(2019, 04, 20)));
@@ -520,7 +520,7 @@ class DateTest extends TestCase
         $this->assertFalse($r1->includes(JustDate::make(2019, 04, 27)));
     }
 
-    public function testRangeIsSameAs(): void
+    public function test_range_is_same_as(): void
     {
         $r1 = DateRange::fromYmd('2024-08-01', '2024-08-05');
         $this->assertTrue($r1->isSameAs($r1));
@@ -533,7 +533,7 @@ class DateTest extends TestCase
         $this->assertFalse($r2->isSameAs(DateRange::fromYmd('2024-08-12', '2024-08-12')));
     }
 
-    public function testRangeIterators(): void
+    public function test_range_iterators(): void
     {
         // Normal range
         $r1 = DateRange::fromYmd('2019-04-21', '2019-04-25');
@@ -600,7 +600,7 @@ class DateTest extends TestCase
         $this->assertSame(false, $test_var);
     }
 
-    public function testRangeIntersectionAndContains(): void
+    public function test_range_intersection_and_contains(): void
     {
         $r1 = DateRange::fromYmd('2019-04-21', '2019-04-25');
 
@@ -645,7 +645,7 @@ class DateTest extends TestCase
         $this->assertFalse($r2->contains($r1));
     }
 
-    public function testIteratingSubRanges(): void
+    public function test_iterating_sub_ranges(): void
     {
         // Split the range into subranges by month
         $r1 = DateRange::fromYmd('2021-02-28', '2021-04-02');
@@ -688,7 +688,7 @@ class DateTest extends TestCase
         $this->assertSame(2, $subranges[0]['value']);
     }
 
-    public function testSerialization(): void
+    public function test_serialization(): void
     {
         $d1 = JustDate::make(2019, 4, 21);
         $s = serialize($d1);
@@ -709,7 +709,7 @@ class DateTest extends TestCase
         $this->assertSame('{"start":"2019-04-21","end":"2019-04-25"}', json_encode($r));
     }
 
-    public function testAddWorkingDays(): void
+    public function test_add_working_days(): void
     {
         $d1 = JustDate::make(2023, 9, 4); // Monday
         $this->assertJustDate('2023-09-04', $d1->addWorkingDays(0));
@@ -731,7 +731,7 @@ class DateTest extends TestCase
         $this->assertJustDate('2023-09-05', $d1->addWorkingDays(-1, $holidays)); // Tue
     }
 
-    public function testDayOfWeekEnum(): void
+    public function test_day_of_week_enum(): void
     {
         $mon = DayOfWeek::Monday;
         $this->assertSame(DayOfWeek::Wednesday, $mon->addDays(2));

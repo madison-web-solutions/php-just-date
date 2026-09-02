@@ -289,7 +289,7 @@ class DateRange implements DateRangeList, JsonSerializable
     /**
      * Test whether a particular DateRange is the same as this one - IE has the same start date and same end date
      *
-     * @param  DateRange  $range The DateRange to compare with
+     * @param  DateRange  $range  The DateRange to compare with
      * @return bool True if the $range has the same start and end dates as this range, false otherwise
      */
     public function isSameAs(DateRange $range): bool

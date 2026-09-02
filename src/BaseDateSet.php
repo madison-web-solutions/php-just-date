@@ -14,7 +14,7 @@ use JsonSerializable;
 abstract class BaseDateSet implements DateRangeList, JsonSerializable
 {
     /**
-     * @var DateRange[]
+     * @var list<DateRange>
      */
     protected $ranges;
 
@@ -26,7 +26,7 @@ abstract class BaseDateSet implements DateRangeList, JsonSerializable
      * The resulting list of ranges will be sorted and disjoint
      *
      * @param  JustDate  ...$dates  The input dates
-     * @return DateRange[] Resulting normalized list of ranges
+     * @return list<DateRange> Resulting normalized list of ranges
      */
     public static function sortedRangesFromSingleDates(JustDate ...$dates): array
     {
@@ -58,7 +58,7 @@ abstract class BaseDateSet implements DateRangeList, JsonSerializable
      *
      * @param  DateRange[]  $ranges  Original sorted, disjoint list of ranges
      * @param  DateRange  $cut  Range to be subtracted from each of the ranges
-     * @return DateRange[] Resulting normalized list of ranges after subtracting $cut
+     * @return list<DateRange> Resulting normalized list of ranges after subtracting $cut
      */
     protected static function subtractRangeFromSortedRanges(array $ranges, DateRange $cut): array
     {
@@ -115,7 +115,7 @@ abstract class BaseDateSet implements DateRangeList, JsonSerializable
      * Used internally by DateSet and MutableDateSet objects
      * The returned array of ranges is normalized (sorted and disjoint)
      *
-     * @return DateRange[] Normalised list of ranges in the intersection of $a and $b
+     * @return list<DateRange> Normalised list of ranges in the intersection of $a and $b
      */
     protected static function getIntersectingRanges(BaseDateSet $a, BaseDateSet $b): array
     {
@@ -136,7 +136,7 @@ abstract class BaseDateSet implements DateRangeList, JsonSerializable
      * Used internally by DateSet and MutableDate set objects.
      *
      * @param  DateRange[]  $in
-     * @return DateRange[]
+     * @return list<DateRange>
      */
     protected static function normalizeRanges(array $in): array
     {
@@ -324,7 +324,7 @@ abstract class BaseDateSet implements DateRangeList, JsonSerializable
     /**
      * Get the normalized list of ranges as a plain PHP array
      *
-     * @return DateRange[]
+     * @return list<DateRange>
      */
     public function getRanges(): array
     {

@@ -316,6 +316,26 @@ The formatted string
 
 ***
 
+### onDate
+
+Get a DateTime object for this time on the specified date in the specified timezone
+
+```php
+public onDate(\MadisonSolutions\JustDate\JustDate $date, ?\DateTimeZone $timezone = null): \DateTime
+```
+
+Complementary method to JustDate::atTime() - $time->onDate($date) is equivalent to $date->atTime($time).
+If no timezone is specified the DateTime will use the system default timezone
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$date` | `\MadisonSolutions\JustDate\JustDate` | The date |
+| `$timezone` | `?\DateTimeZone` | Optional timezone |
+
+***
+
 ### addTime
 
 Add the specified number of hours, minutes and seconds to this time, and return a new JustTime object for the result

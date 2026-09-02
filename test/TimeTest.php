@@ -5,6 +5,7 @@
  * @noinspection PhpRedundantOptionalArgumentInspection
  */
 
+use MadisonSolutions\JustDate\JustDate;
 use MadisonSolutions\JustDate\JustTime;
 use PHPUnit\Framework\TestCase;
 
@@ -160,6 +161,26 @@ class TimeTest extends TestCase
         $this->assertSame(35, $t->minutes);
         $this->assertSame(17, $t->seconds);
         $this->assertSame(16 * 60 * 60 + 35 * 60 + 17, $t->since_midnight);
+    }
+
+    public function test_on_date(): void
+    {
+        $default_timezone = new DateTimeZone(date_default_timezone_get());
+        $tahiti = new DateTimeZone('Pacific/Tahiti');
+
+        $t1 = JustTime::make(14, 35, 2);
+        $d1 = JustDate::fromYmd('2021-04-28');
+
+        $td = $t1->onDate($d1);
+        $this->assertEquals('2021-04-28 14:35:02', $td->format('Y-m-d H:i:s'));
+        $this->assertEquals($default_timezone, $td->getTimezone());
+
+        $td = $t1->onDate($d1, $tahiti);
+        $this->assertEquals('2021-04-28 14:35:02', $td->format('Y-m-d H:i:s'));
+        $this->assertEquals($tahiti, $td->getTimezone());
+
+        // Should be the complement of JustDate::atTime()
+        $this->assertEquals($d1->atTime($t1, $tahiti), $td);
     }
 
     public function test_add_time(): void

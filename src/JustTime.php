@@ -251,6 +251,20 @@ class JustTime implements JsonSerializable
     }
 
     /**
+     * Get a DateTime object for this time on the specified date in the specified timezone
+     *
+     * Complementary method to JustDate::atTime() - $time->onDate($date) is equivalent to $date->atTime($time).
+     * If no timezone is specified the DateTime will use the system default timezone
+     *
+     * @param  JustDate  $date  The date
+     * @param  ?DateTimeZone  $timezone  Optional timezone
+     */
+    public function onDate(JustDate $date, ?DateTimeZone $timezone = null): DateTime
+    {
+        return $date->toDateTime($this, $timezone);
+    }
+
+    /**
      * Add the specified number of hours, minutes and seconds to this time, and return a new JustTime object for the result
      *
      * Note values will wrap around midnight. Eg if you add 2 hours to 23:30:00 you'll get 01:30:00.

@@ -446,6 +446,26 @@ If no timezone is specified the DateTime will use the system default timezone
 
 ***
 
+### atTime
+
+Get a DateTime object for this date at the specified time in the specified timezone
+
+```php
+public atTime(\MadisonSolutions\JustDate\JustTime $time, ?\DateTimeZone $timezone = null): \DateTime
+```
+
+Alias for toDateTime() with a required time. The complementary method is JustTime::onDate().
+If no timezone is specified the DateTime will use the system default timezone
+
+**Parameters:**
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `$time` | `\MadisonSolutions\JustDate\JustTime` | The time of day |
+| `$timezone` | `?\DateTimeZone` | Optional timezone |
+
+***
+
 ### addDays
 
 Add the specified number of days to this date, and return a new JustDate object for the result

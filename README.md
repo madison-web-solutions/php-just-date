@@ -326,6 +326,27 @@ $t4 = $t1->addTime(0, 0, -1);
 
 ```
 
+### Combining a date and a time
+
+To get a full PHP `DateTime` object, combine a `JustDate` with a `JustTime`, optionally specifying a timezone (the system default timezone is used otherwise).
+
+```php
+use MadisonSolutions\JustDate\JustDate;
+use MadisonSolutions\JustDate\JustTime;
+
+$date = JustDate::make(2021, 4, 28);
+$time = JustTime::make(14, 35, 2);
+
+$dt = $date->atTime($time);
+// DateTime for 2021-04-28 14:35:02 in the system default timezone
+
+$dt = $time->onDate($date, new DateTimeZone('Pacific/Tahiti'));
+// DateTime for 2021-04-28 14:35:02 in Tahiti
+
+// $date->atTime($time) and $time->onDate($date) are equivalent
+// atTime() is an alias for $date->toDateTime($time)
+```
+
 ### Rounding to a certain interval
 
 ```PHP

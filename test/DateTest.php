@@ -364,6 +364,29 @@ class DateTest extends TestCase
         $this->assertEquals($tahiti, $td->getTimezone());
     }
 
+    public function test_at_time(): void
+    {
+        $default_timezone = new DateTimeZone(date_default_timezone_get());
+        $tahiti = new DateTimeZone('Pacific/Tahiti');
+
+        $d1 = JustDate::make(2021, 04, 28);
+        $t1 = JustTime::fromHis('14:35:02');
+
+        // atTime() is an alias for toDateTime() with the time required
+        $td = $d1->atTime($t1);
+        $this->assertEquals('2021-04-28 14:35:02', $td->format('Y-m-d H:i:s'));
+        $this->assertEquals($default_timezone, $td->getTimezone());
+        $this->assertEquals($d1->toDateTime($t1), $td);
+
+        $td = $d1->atTime($t1, $tahiti);
+        $this->assertEquals('2021-04-28 14:35:02', $td->format('Y-m-d H:i:s'));
+        $this->assertEquals($tahiti, $td->getTimezone());
+        $this->assertEquals($d1->toDateTime($t1, $tahiti), $td);
+
+        // Should be the complement of JustTime::onDate()
+        $this->assertEquals($t1->onDate($d1, $tahiti), $td);
+    }
+
     public function test_compare(): void
     {
         $jan1 = JustDate::fromYmd('2024-01-01');

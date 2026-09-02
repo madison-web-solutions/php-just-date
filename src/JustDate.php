@@ -383,6 +383,20 @@ class JustDate implements DateRangeList, JsonSerializable
     }
 
     /**
+     * Get a DateTime object for this date at the specified time in the specified timezone
+     *
+     * Alias for toDateTime() with a required time. The complementary method is JustTime::onDate().
+     * If no timezone is specified the DateTime will use the system default timezone
+     *
+     * @param  JustTime  $time  The time of day
+     * @param  ?DateTimeZone  $timezone  Optional timezone
+     */
+    public function atTime(JustTime $time, ?DateTimeZone $timezone = null): DateTime
+    {
+        return $this->toDateTime($time, $timezone);
+    }
+
+    /**
      * Add the specified number of days to this date, and return a new JustDate object for the result
      *
      * Note if a negative number of days is supplied then the result will be an earlier date

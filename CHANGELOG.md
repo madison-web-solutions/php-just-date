@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.3.0]
+
+### Added
+ - Added `atTime()` method to JustDate (alias for `toDateTime()` with a required time) and the complementary `onDate()` method to JustTime
+
+
+
 ## [2.2.1]
 
 ### Fixed

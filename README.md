@@ -411,3 +411,17 @@ foreach ($range->eachDate() as $date) {
 }
 // 17,20,21,22,23,24,25,
 ```
+
+## Development
+
+PHP does not need to be installed locally; the test suite, PHPStan and Pint run inside Docker under every PHP version the library supports (8.1 to 8.5).
+
+```
+make build      # build the Docker images (first time only)
+make install    # composer install
+make test       # run the tests under one PHP version (make test PHP=8.1 to choose)
+make test-all   # run the tests under every supported PHP version
+make check      # tests and PHPStan under every version, plus a Pint style check
+```
+
+Run `make help` to see all available targets.
